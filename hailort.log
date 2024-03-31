@@ -1,0 +1,16 @@
+[2024-03-31 16:00:32.894] [197066] [HailoRT] [info] [hailort_driver.cpp:188] [HailoRTDriver] Hailo PCIe driver version 4.16.0
+[2024-03-31 16:00:32.894] [197066] [HailoRT] [info] [device.cpp:46] [Device] OS Version: Linux 5.15.0-60-generic #66-Ubuntu SMP Fri Jan 20 14:29:49 UTC 2023 x86_64
+[2024-03-31 16:00:32.894] [197066] [HailoRT] [info] [control.cpp:92] [control__parse_identify_results] firmware_version is: 4.16.0
+[2024-03-31 16:00:32.895] [197066] [HailoRT] [info] [control.cpp:92] [control__parse_identify_results] firmware_version is: 4.16.0
+[2024-03-31 16:00:33.206] [197066] [HailoRT] [info] [control.cpp:1187] [set_power_measurement] The chosen dvm type is: 9, and measurement type: 2
+[2024-03-31 16:00:33.206] [197066] [HailoRT] [warning] [control.cpp:1190] [set_power_measurement] Using the overcurrent protection dvm for power measurement will disable the overcurrent protection.
+If only taking one measurement, the protection will resume automatically.
+If doing continuous measurement, to enable overcurrent protection again you have to stop the power measurement on this dvm.
+[2024-03-31 16:01:16.706] [197513] [HailoRT] [info] [hailort_driver.cpp:188] [HailoRTDriver] Hailo PCIe driver version 4.16.0
+[2024-03-31 16:01:16.706] [197513] [HailoRT] [info] [device.cpp:46] [Device] OS Version: Linux 5.15.0-60-generic #66-Ubuntu SMP Fri Jan 20 14:29:49 UTC 2023 x86_64
+[2024-03-31 16:01:16.706] [197513] [HailoRT] [info] [control.cpp:92] [control__parse_identify_results] firmware_version is: 4.16.0
+[2024-03-31 16:01:16.707] [197513] [HailoRT] [info] [control.cpp:92] [control__parse_identify_results] firmware_version is: 4.16.0
+[2024-03-31 16:01:17.017] [197513] [HailoRT] [info] [control.cpp:1187] [set_power_measurement] The chosen dvm type is: 9, and measurement type: 2
+[2024-03-31 16:01:17.017] [197513] [HailoRT] [warning] [control.cpp:1190] [set_power_measurement] Using the overcurrent protection dvm for power measurement will disable the overcurrent protection.
+If only taking one measurement, the protection will resume automatically.
+If doing continuous measurement, to enable overcurrent protection again you have to stop the power measurement on this dvm.
