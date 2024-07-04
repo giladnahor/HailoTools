@@ -1,0 +1,43 @@
+# typos.toml
+# install typos:
+# cargo install typos-cli
+# add to alias to use the same file for all typos checks
+# alias gilad_typos='typos --config /home/giladn/HailoTools/typos.toml'
+
+
+# Define file and directory patterns to exclude from the typo check
+[files]
+extend-exclude = [
+    "build*/**",
+    "**/*egg-info*/**",
+    "*.bin",
+    "*.hef",
+    "*.o",
+    "*.so",
+    "*.a",
+    "*.log",
+    "*.svg",
+]
+
+# Define custom words or terms that should be considered valid
+[default.extend-words]
+Hailo = "Hailo"
+meson = "meson"
+gstreamer = "gstreamer"
+thr = "thr"
+
+
+# C++ specific configuration
+[type.cpp]
+extend-glob = ["**/*.cpp", "**/*.hpp", "**/*.h"]
+
+[type.cpp.extend-words]
+arange = "arange"  # Valid xt command
+xarray = "xarray"  # Valid xt type
+
+# Define other configuration options
+[default]
+locale = "en-us"
+case-sensitive = false
+check-camel-case = true
+check-snake-case = true
