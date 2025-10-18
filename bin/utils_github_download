@@ -1,0 +1,18 @@
+#!/usr/bin/env python3
+"""
+GitHub Directory Downloader - Download specific directories from GitHub repos.
+
+This tool downloads specific directories from GitHub repositories without
+cloning the entire repository, useful for getting examples or specific code.
+"""
+
+import sys
+import os
+
+# Add the parent directory to Python path to import hailo_utils
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+
+from hailo_utils.downloaders.github import main
+
+if __name__ == '__main__':
+    main()

@@ -1,15 +1,17 @@
 # Hailo Utils - Makefile for easy installation and development
 
-.PHONY: help install install-dev install-deps clean test lint format check build docs
+.PHONY: help install install-dev install-deps install-cli-tools install-cli-tools-user clean test lint format check build docs show-deps show-cli-tools
 
 # Default target
 help:
 	@echo "Hailo Utils - Available targets:"
 	@echo ""
 	@echo "Installation:"
-	@echo "  install-deps    Install system dependencies (Ubuntu/Debian)"
-	@echo "  install         Install the package"
-	@echo "  install-dev     Install in development mode with dev dependencies"
+	@echo "  install-deps      Install system dependencies (Ubuntu/Debian)"
+	@echo "  install           Install the package"
+	@echo "  install-dev       Install in development mode with dev dependencies"
+	@echo "  install-cli-tools      Install CLI tools to system PATH (/usr/local/bin)"
+	@echo "  install-cli-tools-user Install CLI tools to user PATH (~/.local/bin)"
 	@echo ""
 	@echo "Development:"
 	@echo "  test           Run tests"
@@ -23,6 +25,10 @@ help:
 	@echo ""
 	@echo "Documentation:"
 	@echo "  docs           Build documentation"
+	@echo ""
+	@echo "Information:"
+	@echo "  show-deps         Show system and optional dependencies"
+	@echo "  show-cli-tools    List available CLI tools"
 
 # Installation targets
 install-deps:
@@ -41,6 +47,32 @@ install:
 install-dev:
 	pip install -e ".[dev]"
 	pre-commit install
+
+install-cli-tools:
+	@echo "Installing CLI tools to /usr/local/bin..."
+	@for tool in bin/utils_*; do \
+		if [ -f "$$tool" ]; then \
+			echo "Installing $$tool -> /usr/local/bin/$$(basename $$tool)"; \
+			sudo cp "$$tool" /usr/local/bin/; \
+			sudo chmod +x /usr/local/bin/$$(basename $$tool)"; \
+		fi; \
+	done
+	@echo "CLI tools installed successfully!"
+	@echo "You can now run: utils_help"
+
+install-cli-tools-user:
+	@echo "Installing CLI tools to ~/.local/bin..."
+	@mkdir -p ~/.local/bin
+	@for tool in bin/utils_*; do \
+		if [ -f "$$tool" ]; then \
+			echo "Installing $$tool -> ~/.local/bin/$$(basename $$tool)"; \
+			cp "$$tool" ~/.local/bin/; \
+			chmod +x ~/.local/bin/$$(basename $$tool)"; \
+		fi; \
+	done
+	@echo "CLI tools installed to ~/.local/bin!"
+	@echo "Make sure ~/.local/bin is in your PATH"
+	@echo "You can now run: utils_help"
 
 # Development targets
 test:
@@ -118,6 +150,16 @@ show-deps:
 	@echo "Optional dependencies:"
 	@echo "  - Hailo TAPPAS (for AI features)"
 	@echo "  - PyGObject (for GStreamer integration)"
+
+show-cli-tools:
+	@echo "Available CLI tools:"
+	@for tool in bin/utils_*; do \
+		if [ -f "$$tool" ]; then \
+			echo "  $$(basename $$tool)"; \
+		fi; \
+	done
+	@echo ""
+	@echo "Run 'utils_help' for detailed information"
 
 check-system:
 	@echo "Checking system requirements..."

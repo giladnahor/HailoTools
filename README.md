@@ -76,6 +76,60 @@ docker build -t hailo-utils .
 docker run --privileged -v /dev:/dev hailo-utils
 ```
 
+## 🛠️ Command Line Tools
+
+Hailo Utilities provides several command-line tools with a `utils_` prefix for easy identification:
+
+### Available Tools
+
+Run `utils_help` to see all available tools, or use individual tools:
+
+```bash
+# Get help on all available tools
+utils_help
+
+# Format GStreamer pipelines
+utils_format_pipeline
+
+# Stream videos over RTSP
+utils_rtsp_server video1.mp4 video2.mp4
+
+# Monitor Hailo device temperature
+utils_temp_monitor
+
+# Get git repository information
+utils_git_info
+
+# Get TAPPAS package information
+utils_pkg_info
+
+# Download GitHub directories
+utils_github_download
+```
+
+### Installing CLI Tools
+
+#### System-wide Installation (requires sudo)
+```bash
+make install-cli-tools
+```
+
+#### User Installation (no sudo required)
+```bash
+make install-cli-tools-user
+# Make sure ~/.local/bin is in your PATH
+export PATH="$HOME/.local/bin:$PATH"
+```
+
+#### Manual Installation
+```bash
+# Add bin directory to your PATH
+export PATH="$(pwd)/bin:$PATH"
+
+# Or create symlinks
+sudo ln -s $(pwd)/bin/utils_* /usr/local/bin/
+```
+
 ## 📖 Usage
 
 ### GStreamer Pipeline Formatter
@@ -91,10 +145,13 @@ formatted = format_pipeline(pipeline, line_limit=80)
 print(formatted)
 ```
 
-Or use the command line:
+Command line usage:
 ```bash
+# Using the CLI tool (recommended)
+utils_format_pipeline
+
+# Or using Python module
 python -m hailo_utils.pipeline.formatter
-# Enter your pipeline when prompted
 ```
 
 ### RTSP Video Server
@@ -112,6 +169,10 @@ server.start(port=8554)
 
 Command line usage:
 ```bash
+# Using the CLI tool (recommended)
+utils_rtsp_server video1.mp4 video2.mp4
+
+# Or using Python module
 python -m hailo_utils.pipeline.rtsp_server video1.mp4 video2.mp4
 # Streams available at rtsp://127.0.0.1:8554/stream1, rtsp://127.0.0.1:8554/stream2
 ```
@@ -131,6 +192,10 @@ for device, temp in temp_data.items():
 
 Command line usage:
 ```bash
+# Using the CLI tool (recommended)
+utils_temp_monitor
+
+# Or using Python module
 python -m hailo_utils.core.temperature
 # Displays real-time temperature and power data
 ```
@@ -149,6 +214,15 @@ print(f"Branch: {info['branch']}")
 print(f"URL: {info['url']}")
 ```
 
+Command line usage:
+```bash
+# Using the CLI tool (recommended)
+utils_git_info
+
+# Or using Python module
+python -m hailo_utils.core.git_utils
+```
+
 ### Package Information
 
 Get TAPPAS environment information:
@@ -160,6 +234,15 @@ from hailo_utils.core import get_tappas_info
 tappas_info = get_tappas_info()
 print(f"Workspace: {tappas_info['workspace']}")
 print(f"Version: {tappas_info['version']}")
+```
+
+Command line usage:
+```bash
+# Using the CLI tool (recommended)
+utils_pkg_info
+
+# Or using Python module
+python -m hailo_utils.core.package_info
 ```
 
 ### GitHub Directory Downloader
@@ -175,6 +258,10 @@ download_github_directory("https://github.com/user/repo/tree/main/subdir")
 
 Command line usage:
 ```bash
+# Using the CLI tool (recommended)
+utils_github_download
+
+# Or using Python module
 python -m hailo_utils.downloaders.github
 # Enter GitHub URL when prompted
 ```
@@ -255,9 +342,16 @@ hailo-utils/
 │   │   └── cpp/
 │   └── downloaders/          # Download utilities
 │       └── github.py
+├── bin/                      # Command-line tools
+│   ├── utils_help           # Help for all tools
+│   ├── utils_format_pipeline # Pipeline formatter
+│   ├── utils_rtsp_server    # RTSP video server
+│   ├── utils_temp_monitor   # Temperature monitoring
+│   ├── utils_git_info       # Git repository info
+│   ├── utils_pkg_info       # TAPPAS package info
+│   └── utils_github_download # GitHub downloader
 ├── tests/                    # Test suite
 ├── docs/                     # Documentation
-├── scripts/                  # Utility scripts
 ├── requirements.txt          # Python dependencies
 ├── setup.py                  # Package setup
 ├── pyproject.toml           # Modern packaging config

@@ -64,13 +64,8 @@ Documentation = "https://hailo-utils.readthedocs.io/"
 Repository = "https://github.com/hailo-ai/hailo-utils.git"
 Issues = "https://github.com/hailo-ai/hailo-utils/issues"
 
-[project.scripts]
-hailo-format-pipeline = "hailo_utils.pipeline.formatter:main"
-hailo-rtsp-server = "hailo_utils.pipeline.rtsp_server:main"
-hailo-temp-monitor = "hailo_utils.core.temperature:main"
-hailo-git-info = "hailo_utils.core.git_utils:main"
-hailo-pkg-info = "hailo_utils.core.package_info:main"
-hailo-github-download = "hailo_utils.downloaders.github:main"
+# CLI tools are provided in the bin/ directory with utils_ prefix
+# Use: make install-cli-tools or make install-cli-tools-user
 
 [tool.setuptools]
 packages = ["hailo_utils"]

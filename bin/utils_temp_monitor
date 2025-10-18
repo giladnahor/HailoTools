@@ -1,0 +1,18 @@
+#!/usr/bin/env python3
+"""
+Hailo Temperature Monitor - Monitor temperature and power of Hailo devices.
+
+This tool provides real-time monitoring of Hailo AI hardware temperature
+and power consumption with live updates.
+"""
+
+import sys
+import os
+
+# Add the parent directory to Python path to import hailo_utils
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+
+from hailo_utils.core.temperature import main
+
+if __name__ == '__main__':
+    main()

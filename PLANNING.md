@@ -43,6 +43,15 @@ hailo_utils/
 └── downloaders/
     ├── __init__.py
     └── github.py             # GitHub directory downloader
+
+bin/                          # Command-line tools
+├── utils_help               # Help for all CLI tools
+├── utils_format_pipeline    # Pipeline formatter CLI
+├── utils_rtsp_server       # RTSP server CLI
+├── utils_temp_monitor      # Temperature monitoring CLI
+├── utils_git_info          # Git information CLI
+├── utils_pkg_info          # Package information CLI
+└── utils_github_download   # GitHub downloader CLI
 ```
 
 ## Dependencies
