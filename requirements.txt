@@ -1,0 +1,29 @@
+# Core dependencies - required for basic functionality
+# No external dependencies for core utilities (git, formatting, etc.)
+
+# Optional dependencies for specific features
+# Uncomment and install as needed:
+
+# For Hailo hardware interaction
+# pyhailort>=4.15.0
+
+# For GStreamer integration and RTSP server
+# PyGObject>=3.36.0
+
+# For development and testing
+# pytest>=6.0.0
+# pytest-cov>=2.10.0
+# black>=21.0.0
+# isort>=5.0.0
+# flake8>=3.8.0
+# mypy>=0.800
+# pre-commit>=2.10.0
+
+# For documentation
+# sphinx>=4.0.0
+# sphinx-rtd-theme>=0.5.0
+
+# Note: Some dependencies require system packages to be installed first:
+# - GStreamer: sudo apt-get install libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
+# - GObject: sudo apt-get install libgirepository1.0-dev
+# - RTSP Server: sudo apt-get install libgstrtspserver-1.0-dev

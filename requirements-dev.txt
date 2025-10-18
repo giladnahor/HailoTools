@@ -1,0 +1,17 @@
+# Development dependencies
+pytest>=6.0.0
+pytest-cov>=2.10.0
+pytest-mock>=3.6.0
+black>=21.0.0
+isort>=5.0.0
+flake8>=3.8.0
+mypy>=0.800
+pre-commit>=2.10.0
+
+# Optional runtime dependencies for testing
+PyGObject>=3.36.0; sys_platform == "linux"
+
+# Documentation
+sphinx>=4.0.0
+sphinx-rtd-theme>=0.5.0
+myst-parser>=0.15.0

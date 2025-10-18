@@ -1,0 +1,127 @@
+#!/usr/bin/env python3
+"""
+Hailo Utils Help - Display information about all available utility tools.
+
+This script provides an overview of all available Hailo utility tools
+and their purposes.
+"""
+
+import sys
+import os
+import glob
+from pathlib import Path
+
+def get_script_info(script_path):
+    """Extract description from script docstring."""
+    try:
+        with open(script_path, 'r') as f:
+            lines = f.readlines()
+        
+        # Look for the docstring
+        in_docstring = False
+        description = ""
+        
+        for line in lines:
+            line = line.strip()
+            if line.startswith('"""') and not in_docstring:
+                in_docstring = True
+                # Check if it's a single-line docstring
+                if line.count('"""') == 2:
+                    description = line.strip('"""').strip()
+                    break
+                else:
+                    # Multi-line docstring, get the first line
+                    first_line = line[3:].strip()
+                    if first_line:
+                        description = first_line
+                    continue
+            elif in_docstring:
+                if line.endswith('"""'):
+                    break
+                elif line and not description:
+                    description = line
+                    break
+        
+        # Extract just the title part before the dash
+        if ' - ' in description:
+            description = description.split(' - ', 1)[1]
+        
+        return description or "No description available"
+    
+    except Exception:
+        return "No description available"
+
+def main():
+    """Display help information for all utility tools."""
+    print("🛠️  Hailo Utilities - Available Tools")
+    print("=" * 50)
+    print()
+    print("The following utility tools are available:")
+    print()
+    
+    # Get the bin directory path
+    bin_dir = Path(__file__).parent
+    
+    # Find all utils_* scripts
+    utils_scripts = []
+    for script_path in bin_dir.glob("utils_*"):
+        if script_path.name != "utils_help" and script_path.is_file():
+            utils_scripts.append(script_path)
+    
+    # Sort scripts by name
+    utils_scripts.sort(key=lambda x: x.name)
+    
+    if not utils_scripts:
+        print("No utility scripts found.")
+        return
+    
+    # Display each script with its description
+    max_name_length = max(len(script.name) for script in utils_scripts)
+    
+    for script_path in utils_scripts:
+        script_name = script_path.name
+        description = get_script_info(script_path)
+        
+        # Format the output nicely
+        padding = " " * (max_name_length - len(script_name) + 2)
+        print(f"  {script_name}{padding}{description}")
+    
+    print()
+    print("📖 Usage:")
+    print("  Run any tool with: ./bin/<tool_name>")
+    print("  Or add the bin/ directory to your PATH for system-wide access")
+    print()
+    print("📋 Categories:")
+    print()
+    
+    # Categorize tools
+    categories = {
+        "Pipeline Tools": ["utils_format_pipeline", "utils_rtsp_server"],
+        "System Information": ["utils_git_info", "utils_pkg_info", "utils_temp_monitor"],
+        "Download Tools": ["utils_github_download"],
+        "Help & Documentation": ["utils_help"]
+    }
+    
+    for category, tools in categories.items():
+        print(f"  {category}:")
+        for tool in tools:
+            if any(script.name == tool for script in utils_scripts) or tool == "utils_help":
+                description = get_script_info(bin_dir / tool) if tool != "utils_help" else "Display this help information"
+                print(f"    {tool:<25} {description}")
+        print()
+    
+    print("🔧 Installation:")
+    print("  To make these tools available system-wide:")
+    print("  1. Add the bin/ directory to your PATH:")
+    print(f"     export PATH=\"{bin_dir.absolute()}:$PATH\"")
+    print("  2. Or create symlinks in /usr/local/bin/:")
+    print("     sudo ln -s $(pwd)/bin/utils_* /usr/local/bin/")
+    print("  3. Or use the Makefile:")
+    print("     make install-cli-tools")
+    print()
+    print("📚 For detailed help on any tool, run it without arguments")
+    print("   Example: ./bin/utils_format_pipeline")
+    print()
+
+if __name__ == '__main__':
+    main()

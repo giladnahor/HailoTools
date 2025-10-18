@@ -1,0 +1,18 @@
+#!/usr/bin/env python3
+"""
+TAPPAS Package Information - Get TAPPAS environment configuration.
+
+This tool displays TAPPAS workspace, version, and library directory
+information from environment variables or pkg-config.
+"""
+
+import sys
+import os
+
+# Add the parent directory to Python path to import hailo_utils
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+
+from hailo_utils.core.package_info import main
+
+if __name__ == '__main__':
+    main()

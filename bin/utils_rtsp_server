@@ -1,0 +1,18 @@
+#!/usr/bin/env python3
+"""
+RTSP Video Server - Stream video files over RTSP protocol.
+
+This tool creates an RTSP server that can stream multiple video files
+simultaneously over the network using GStreamer.
+"""
+
+import sys
+import os
+
+# Add the parent directory to Python path to import hailo_utils
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+
+from hailo_utils.pipeline.rtsp_server import main
+
+if __name__ == '__main__':
+    sys.exit(main())
